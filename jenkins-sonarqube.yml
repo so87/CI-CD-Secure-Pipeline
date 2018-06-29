@@ -1,0 +1,51 @@
+version: '3.2' #docker-compose.yml
+services:
+  sonarqube:
+    build:
+      context: sonarqube/
+    networks:
+      - sonarnet
+    ports:
+      - 9000:9000
+      - 9092:9092
+    container_name: sonarqube
+    environment: 
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar
+    volumes:
+      - /data/sonarqube/sonarqube_conf:/opt/sonarqube/conf
+      - /data/sonarqube/sonarqube_data:/opt/sonarqube/data
+      - /data/sonarqube/sonarqube_extensions:/opt/sonarqube/extensions
+      - /data/sonarqube/sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+  
+  db:
+    image: postgres
+    build: /docker/postgres/
+    ports:
+      - "5432:5432"
+    networks:
+      - sonarnet
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    volumes:
+      - /data/postgres/postgresql:/var/lib/postgresql
+      - /data/postgres/postgresql_data:/var/lib/postgresql/data
+
+  jenkins:
+    build:
+      context: jenkins/
+    privileged: true
+    user: root
+    ports:
+      - 8080:8080
+      - 50000:50000
+    container_name: jenkins
+    volumes:
+      - /data/jenkins:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - sonarqube
+
+networks:
+  sonarnet:
+    driver: bridge
