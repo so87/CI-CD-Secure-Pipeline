@@ -22,5 +22,12 @@ mv sonarqube /docker/
 mv jenkins /docker/
 cd /docker/
 
+echo "Open firewall"
+firewall-cmd --zone=public --add-port=9000/tcp --permanent
+firewall-cmd --zone=public --add-port=9002/tcp --permanent
+firewall-cmd --zone=public --add-port=8000/tcp --permanent
+firewall-cmd --zone=public --add-port=50000/tcp --permanent
+firwall-cmd --reload
+
 echo Start the docker containers
 docker-compose up
