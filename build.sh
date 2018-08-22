@@ -16,6 +16,8 @@ mkdir /docker/data/jenkins/
 
 echo Move over files there
 mv build.sh /docker/
+mv clean.sh /docker/
+mv display-jenkins-pass.sh /docker/
 mv docker-compose.yml /docker/
 mv postgres /docker/
 mv sonarqube /docker/
@@ -25,9 +27,9 @@ cd /docker/
 echo "Open firewall"
 firewall-cmd --zone=public --add-port=9000/tcp --permanent
 firewall-cmd --zone=public --add-port=9002/tcp --permanent
-firewall-cmd --zone=public --add-port=8000/tcp --permanent
+firewall-cmd --zone=public --add-port=8080/tcp --permanent
 firewall-cmd --zone=public --add-port=50000/tcp --permanent
-firwall-cmd --reload
+firewall-cmd --reload
 
 echo Start the docker containers
 docker-compose up

@@ -3,6 +3,7 @@ services:
   sonarqube:
     build:
       context: sonarqube/
+    privileged: true
     networks:
       - sonarnet
     ports:
@@ -20,6 +21,7 @@ services:
   db:
     image: postgres
     build: /docker/postgres/
+    privileged: true
     ports:
       - "5432:5432"
     networks:
