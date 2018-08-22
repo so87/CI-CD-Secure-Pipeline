@@ -35,6 +35,7 @@ echo Move over files there
 mv build.sh /docker/
 mv clean.sh /docker/
 mv display-jenkins-pass.sh /docker/
+mv config-remote-docker.sh /docker/
 mv docker-compose.yml /docker/
 mv postgres /docker/
 mv sonarqube /docker/
@@ -48,6 +49,9 @@ firewall-cmd --zone=public --add-port=9002/tcp --permanent
 firewall-cmd --zone=public --add-port=8080/tcp --permanent
 firewall-cmd --zone=public --add-port=50000/tcp --permanent
 firewall-cmd --reload
+
+echo configure docker for remote access
+./config-remote-docker.sh
 
 echo Start the docker containers
 docker-compose up
