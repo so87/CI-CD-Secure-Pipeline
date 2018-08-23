@@ -51,7 +51,7 @@ firewall-cmd --zone=public --add-port=50000/tcp --permanent
 firewall-cmd --reload
 
 echo configure docker for remote access
-./config-remote-docker.sh
+#./config-remote-docker.sh
 
 echo Start the docker containers
 docker-compose up
