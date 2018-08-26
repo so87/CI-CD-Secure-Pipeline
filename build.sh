@@ -14,12 +14,8 @@ systemctl enable docker
 sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-echo "installing git"
-yum install git -y
-
 echo "installing wget"
 yum install wget -y
-
 
 echo Creating the necessary directories for jenkins and sonarqube
 mkdir -p /docker/data/sonarqube/
@@ -32,14 +28,7 @@ mkdir /docker/data/postgres/postgresql_data
 mkdir /docker/data/jenkins/
 
 echo Move over files there
-mv build.sh /docker/
-mv clean.sh /docker/
-mv display-jenkins-pass.sh /docker/
-mv config-remote-docker.sh /docker/
-mv docker-compose.yml /docker/
-mv postgres /docker/
-mv sonarqube /docker/
-mv jenkins /docker/
+mv * /docker/
 cd /docker/
 wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
 
@@ -49,9 +38,6 @@ firewall-cmd --zone=public --add-port=9002/tcp --permanent
 firewall-cmd --zone=public --add-port=8080/tcp --permanent
 firewall-cmd --zone=public --add-port=50000/tcp --permanent
 firewall-cmd --reload
-
-echo configure docker for remote access
-#./config-remote-docker.sh
 
 echo Start the docker containers
 docker-compose up
