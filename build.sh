@@ -26,6 +26,7 @@ mkdir /docker/data/sonarqube/sonarqube_bundled-plugins
 mkdir -p /docker/data/postgres/postgresql
 mkdir /docker/data/postgres/postgresql_data
 mkdir /docker/data/jenkins/
+mkdir -p /nginx/data/
 
 echo Move over files there
 mv * /docker/
@@ -33,6 +34,8 @@ cd /docker/
 wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
 
 echo "Open firewall"
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --zone=public --add-port=9000/tcp --permanent
 firewall-cmd --zone=public --add-port=9002/tcp --permanent
 firewall-cmd --zone=public --add-port=8080/tcp --permanent
@@ -40,4 +43,6 @@ firewall-cmd --zone=public --add-port=50000/tcp --permanent
 firewall-cmd --reload
 
 echo Start the docker containers
-docker-compose up
+docker-compose up -d
+cd docker-compose-letsencrypt-nginx-proxy-companion/
+./start.sh
