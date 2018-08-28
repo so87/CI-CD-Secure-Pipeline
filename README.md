@@ -1,4 +1,4 @@
-## Docker Stack
+## CI-CD-Secure-Pipeline
 You can download this and easily get sonarqube and jenkins up and running within minutes!  
 
 ### Dependencies
