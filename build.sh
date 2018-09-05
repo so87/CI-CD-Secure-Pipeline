@@ -40,5 +40,16 @@ firewall-cmd --reload
 
 echo Start the docker containers
 docker-compose up -d
+
+echo Getting nginx companion containers
+git clone https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion.git
 cd docker-compose-letsencrypt-nginx-proxy-companion/
-./start.sh
+cp .env.sample .env
+mkdir -p /nginx/data
+
+echo Please follow the below config to start up all of the containers with their ssl certs
+echo Change the nginx data path
+echo Remove the logging stuff in the docker compose file
+echo Put privileged: true by all containers
+echo Run ./start to start and wait a minutechange the nginx data path
+
