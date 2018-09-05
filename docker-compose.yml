@@ -4,14 +4,11 @@ services:
     build:
       context: sonarqube/
     privileged: true
-    ports:
-      - 9000:9000
-      - 9092:9092
     container_name: sonarqube
     environment: 
       - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar
-      - VIRTUAL_HOST=simon-sonarqube.crabdance.com
-      - LETSENCRYPT_HOST=simon-sonarqube.crabdance.com
+      - VIRTUAL_HOST=sonarqube.owens-netsec.com
+      - LETSENCRYPT_HOST=sonarqube.owens-netsec.com
       - LETSENCRYPT_EMAIL=simonowens157@gmail.com
       - VIRTUAL_PORT=9000
     volumes:
@@ -24,8 +21,6 @@ services:
     image: postgres
     build: /docker/postgres/
     privileged: true
-    ports:
-      - "5432:5432"
     environment:
       - POSTGRES_USER=sonar
       - POSTGRES_PASSWORD=sonar
@@ -38,13 +33,10 @@ services:
       context: jenkins/
     privileged: true
     user: root
-    ports:
-      - 8080:8080
-      - 50000:50000
     container_name: jenkins
     environment: 
-      - VIRTUAL_HOST=simon-jenkins.crabdance.com
-      - LETSENCRYPT_HOST=simon-jenkins.crabdance.com
+      - VIRTUAL_HOST=jenkins.owens-netsec.com
+      - LETSENCRYPT_HOST=jenkins.owens-netsec.com
       - LETSENCRYPT_EMAIL=simonowens157@gmail.com
       - VIRTUAL_PORT=8080
     volumes:

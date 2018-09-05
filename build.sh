@@ -36,10 +36,6 @@ wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanne
 echo "Open firewall"
 firewall-cmd --zone=public --add-port=80/tcp --permanent
 firewall-cmd --zone=public --add-port=443/tcp --permanent
-firewall-cmd --zone=public --add-port=9000/tcp --permanent
-firewall-cmd --zone=public --add-port=9002/tcp --permanent
-firewall-cmd --zone=public --add-port=8080/tcp --permanent
-firewall-cmd --zone=public --add-port=50000/tcp --permanent
 firewall-cmd --reload
 
 echo Start the docker containers
