@@ -7,6 +7,7 @@ You can download this and easily get sonarqube and jenkins up and running within
   * docker-compose
 
 ### Procedure
+  0. You must have your own DNS entry and reachable from the internet.  You can use afraid DNS for free, and tell your firewall to forward ports to your docker containers.
   1. git clone "https://github.com/so87/CI-CD-Secure-Pipeline.git"
   2. cd CI-CD-Secure-Pipeline/
   3. ./build.sh
